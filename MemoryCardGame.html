@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Memory Card Game!</title>
+        <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    </head>
+    <body style="background-color: #a5f0dc;">
+        <div id="root"></div>
+        <script type="text/babel">
+            
+            const Front = () => {
+                return(
+                    <img src={'./FrontCard.png'} style={{
+                        height: '100%',
+                        width: '100%',
+                        margin: '0px',
+                        borderRadius: '1px',
+                        position: 'absolute'
+                    }}/>
+                )
+            }
+
+            const Back = ({animalCard}) => {
+                return(
+                    <img src={animalCard} style={{
+                        height: '100%',
+                        width: '100%',
+                        transform: 'rotateX(180deg)',
+                        position: 'absolute'
+                    }}/>
+                )
+            }
+
+            const memoryCards = ({setScore, setMovement}) => {
+                var CardList = [
+                    'Cards/caballo.png',
+                    'Cards/feneco.png',
+                    'Cards/gato.png',
+                    'Cards/mapache.png',
+                    'Cards/pato.png',
+                    'Cards/perro.png',
+                    'Cards/tucan.png',
+                    'Cards/vaca.png'
+                ]
+            };
+
+            const memoryCardsTemplate = () => {
+                return(
+                    <div style={{
+                        width: '100px',
+                        height: '600px',
+                        border: '10px solid #000000'
+                    }}>
+                    </div>
+                );
+            };
+
+            const root = ReactDOM.createRoot(document.getElementById('root'))
+        </script>
+    </body>
+</html>
