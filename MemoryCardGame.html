@@ -13,11 +13,12 @@
             const Front = () => {
                 return(
                     <img src={'./FrontCard.png'} style={{
-                        height: '100%',
+                        borderRadius: '5px',
+                        height:'100%',
                         width: '100%',
-                        margin: '0px',
-                        borderRadius: '1px',
-                        position: 'absolute'
+                        backfaceVisibility:'hidden',
+                        margin:'0px',
+                        position:'absolute'
                     }}/>
                 )
             }
@@ -25,11 +26,12 @@
             const Back = ({animalCard}) => {
                 return(
                     <img src={animalCard} style={{
-                        height: '100%',
+                        borderRadius: '5px',
+                        height:'100%',
                         width: '100%',
-                        backfaceVisibility: 'hidden',
-                        transform: 'rotateX(180deg)',
-                        position: 'absolute'
+                        backfaceVisibility:'hidden',
+                        transform: 'rotateY(180deg)',
+                        position:'absolute'
                     }}/>
                 )
             }
@@ -38,12 +40,17 @@
                 let rotable = degree ? '180' : '0'
                 return(
                     <div style={{
-                        width: '100px',
-                        height: '150px',
-                        border: '10px solid #000000',
-                        margin: 'auto auto',
-                        transition: 'transform 500ms',
-                        transform: 'rotateX('+rotable+'deg)',
+                        background:'none',
+                        borderRadius: '5px',
+                        height:'124px',
+                        width: '74px',
+                        border: 'black solid 8px',
+                        perspective: '1000px',
+                        margin:'auto auto',
+                        boxShadow: '0px 0px 10px rgba(255, 255, 255,0.2)',
+                        transformStyle: 'preserve-3d',
+                        transition: 'transform 1000ms',
+                        transform: 'rotateY('+degree+'deg)',
                         cursor: 'pointer',
                         position: 'relative'
                     }}
@@ -54,34 +61,16 @@
                 );
             }
 
-            const Victory = ({indeX}) => {
-                return(
-                    <div style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        position: 'absolute',
-                        color: 'white',
-                        backgroundColor: '#a5f0dc',
-                        zIndex: indeX,
-                        fontSize: '50px'
-                    }}>
-                        <p>Felicidades! Completaste el juego!</p>
-                        <button onClick={()=>{location.reload()}}>Jugar otra vez</button>
-                    </div>
-                )
-            }
-
             const memoryCards = ({setScore, setMovement}) => {
                 var CardList = [
-                    'Cards/caballo.png',
-                    'Cards/feneco.png',
-                    'Cards/gato.png',
-                    'Cards/mapache.png',
-                    'Cards/pato.png',
-                    'Cards/perro.png',
-                    'Cards/tucan.png',
-                    'Cards/vaca.png'
+                    './Cards/caballo.png',
+                    './Cards/feneco.png',
+                    './Cards/gato.png',
+                    './Cards/mapache.png',
+                    './Cards/pato.png',
+                    './Cards/perro.png',
+                    './Cards/tucan.png',
+                    './Cards/vaca.png'
                 ]
                 const [rotar, setRotar] = React.useState(Array(16).fill(false))
                 const randomizer = (maxRandomizer) => {
@@ -147,6 +136,24 @@
                             <Template key={index} card={item} onClick={() => click(index)} degree={rotar[index]}/>
                         ))
                     }
+                    </div>
+                )
+            }
+
+            const Victory = ({indeX}) => {
+                return(
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        position: 'absolute',
+                        color: 'white',
+                        backgroundColor: '#a5f0dc',
+                        zIndex: indeX,
+                        fontSize: '50px'
+                    }}>
+                        <p>Felicidades! Completaste el juego!</p>
+                        <button onClick={()=>{location.reload()}}>Jugar otra vez</button>
                     </div>
                 )
             }
