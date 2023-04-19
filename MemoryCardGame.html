@@ -35,6 +35,7 @@
             }
 
             const Template = (card, degree, onClick) => {
+                console.log(card)
                 let rotable = degree ? '0' : '180'
                 return(
                     <div style={{
@@ -47,13 +48,13 @@
                         boxShadow: '0px 0px 5px rgba(255, 255, 255,0.2)',
                         transformStyle: 'preserve-3d',
                         transition: 'transform 1000ms',
-                        transform: 'rotateY('+rotable+'deg)',
+                        transform: 'rotateY('+degree+'deg)',
                         cursor: 'pointer',
                         position: 'relative'
                     }}
                         onClick={onClick}
                     >
-                        <Back animalCard={card}/>
+                        <Back animalCard={card.card}/>
                         <Front/>
                     </div>
                 )
@@ -61,6 +62,14 @@
 
             const MemoryCards = ({setScore, setMovement}) => {
                 var cardList = [
+                    'Cards/caballo.png',
+                    'Cards/feneco.png',
+                    'Cards/gato.png',
+                    'Cards/mapache.png',
+                    'Cards/pato.png',
+                    'Cards/perro.png',
+                    'Cards/tucan.png',
+                    'Cards/vaca.png',
                     'Cards/caballo.png',
                     'Cards/feneco.png',
                     'Cards/gato.png',
@@ -106,6 +115,7 @@
                 }
 
                 const imagen = React.useRef([...randList])
+                console.log(imagen)
                 const click = (index) => {
                     if(rotar[index] !== true) {
                         setRotar(prevState => {
