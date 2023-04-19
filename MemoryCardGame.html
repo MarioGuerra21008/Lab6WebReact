@@ -25,18 +25,17 @@
             const Back = ({animalCard}) => {
                 return(
                     <img src={animalCard} style={{
-                        height:'100%',
+                        height: '100%',
                         width: '100%',
-                        backfaceVisibility:'hidden',
+                        backfaceVisibility: 'hidden',
                         transform: 'rotateY(180deg)',
-                        position:'absolute'
+                        position: 'absolute'
                     }}/>
                 )
             }
 
-            const Template = (card, degree, onClick) => {
-                console.log(card)
-                let rotable = degree ? '0' : '180'
+            const Template = ({card, degree, onClick}) => {
+                let rotable=degree ? '180' : '0'
                 return(
                     <div style={{
                         background:'none',
@@ -47,15 +46,15 @@
                         margin:'auto auto',
                         boxShadow: '0px 0px 5px rgba(255, 255, 255,0.2)',
                         transformStyle: 'preserve-3d',
-                        transition: 'transform 1000ms',
-                        transform: 'rotateY('+degree+'deg)',
+                        transition: 'transform 1s',
+                        transform: 'rotateY('+rotable+'deg)',
                         cursor: 'pointer',
                         position: 'relative'
                     }}
-                        onClick={onClick}
+                    onClick={onClick}
                     >
-                        <Back animalCard={card.card}/>
-                        <Front/>
+                    <Back animalCard={card}/>
+                    <Front />
                     </div>
                 )
             }
@@ -115,7 +114,6 @@
                 }
 
                 const imagen = React.useRef([...randList])
-                console.log(imagen)
                 const click = (index) => {
                     if(rotar[index] !== true) {
                         setRotar(prevState => {
@@ -179,7 +177,7 @@
                     setScore(prevState => {
                         if((prevState+1)>=8) {
                             setCon(() => {setCon('50'), 1000})
-                            setTimeout(() => {setIndeX(2)}, 1000)
+                            setTimeout(() => {setZIndex(2)}, 1000)
                             setZIndex(2)
                         }
                         return prevState + 1
@@ -189,28 +187,34 @@
                 return(
                     <div style={{
                         width: '100%',
-                        height: '100%',
-                        padding: '0px'
+                        height:'100%',
+                        margin:'0px, 0px',
+                        pading:'0px'
                     }}>
 
                         <div style={{
                             position: 'relative',
-                            display: 'flex',
-                            justifyContent: 'bottom',
-                            alignItems: 'center',
                             zIndex: 3
                         }}>
-                            <h3>Puntos: {score} Movimientos: {movement}</h3>
-                        </div>
-
-                        <div style={{
-                            position: 'relative',
-                            zIndex: 1
-                        }}>
-                            <MemoryCards setScore={() => {puntuacion()}} setMovement = {() => setMovement(movement+1)}/>
-                        </div>
-                        <Victory contraste={con} zIndex={zIndex}></Victory>
-                    </div>
+                            <h1 style={{
+                                fontFamily: "Times New Roman",
+                                color: 'black'
+                            }}>Score: {score}</h1>
+                            <h1 style={{
+                                fontFamily: "Times New Roman",
+                                color: 'black',
+                                position:'relative',
+                                zIndex:3
+                            }}>Movimientos: {movement}</h1>
+                </div>
+                <div style={{
+                    position: 'relative',
+                    zIndex:1
+                }}>
+                    <MemoryCards setScore={() => {puntuacion()}} setMovement = {() => setMovement(movement+1)}/>
+                </div>
+                <Victory contraste={con} zIndex={zIndex}></Victory>
+                </div>
                 )
             }
             const root = ReactDOM.createRoot(document.getElementById('root'))
